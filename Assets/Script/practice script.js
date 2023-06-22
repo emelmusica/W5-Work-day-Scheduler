@@ -16,184 +16,51 @@
 
 // ** GLOBAL VARIABLES ** // 
 
-//target <p> element for currentDay to display
-var currentDayEl = $('#currentDay');
-//target containter <div>
-var containerEl = $('.container');
-//get current time in hA format
-var currentHour = moment().hour();
-//create array that lists all of the hours for current work day
-var workDayHours = [
-    moment().hour(9).format('hA'),
-    moment().hour(10).format('hA'),
-    moment().hour(11).format('hA'),
-    moment().hour(12).format('hA'),
-    moment().hour(13).format('hA'),
-    moment().hour(14).format('hA'),
-    moment().hour(15).format('hA'),
-    moment().hour(16).format('hA'),
-    moment().hour(17).format('hA')
-];
-//target the div that holds the time block hour
-var timeBlockHour = $('col-1 hour')
-//target the div that holds the task info
-var task = $('.description')
-
-// ** END GLOBAL VARIABLES ** //
-
-//add current day to <p> tag in header
-var currentDay = moment().format('dddd, MMMM Do');
-currentDayEl.text(currentDay);
-
-
-//compare each time block to the current time
-// - if after, if present, add class of 'future' to timeBlockEventSpace
-// - if equal, add class of 'present' to timeBlockEventSpace
-// - else add class of past to timeBlockEventSpace
-
-function auditTimeBlock(timeBlockEventSpace) {
-    //retrieve the hour from the div and convert it to the x'th hour of the day
-    var currentTimeBlockHour = moment($(timeBlockHour).text().trim(), 'hA').hour();
-
-    //remove class of 'past present future
-    $(timeBlockEventSpace).removeClass('past present future');
-
-    //conditional to add correct color background to time block depending on time
-    if (currentTimeBlockHour > currentHour) {
-        $(timeBlockEventSpace).addClass('future');
-    }
-    else if (currentTimeBlockHour === currentHour) {
-        $(timeBlockEventSpace).addClass('present');
-    }
-    else {
-        $(timeBlockEventSpace).addClass('past');
-    }
-}
-// create function to load tasks
-function loadTask() {
-
-    //create for loop to get task for each hour
-    //hour is the indexes of workDayHours
-    //task is the value of <p> at that index
-
-    for (var i = 0; i < workDayHours.length; i++) {
-        let task = localStorage.getItem(workDayHours[i])
-
-        if (task) {
-            $('#' + (i + 9)).siblings().first().children().text(task);
-        }
-    }
-}
-// create function to save task
-function saveTask(hour, task) {
-    localStorage.setItem(hour, task);
+// Function to get the current date and display it in the header
+function displayCurrentDay() {
+  var currentDate = moment().format("dddd, MMMM Do");
+  $("#currentDay").text(currentDate);
 }
 
-//add time blocks for each hour (3 columns in 9 rows: 9AM to 5PM) format for 9AM is hA
-for (var i = 0; i < workDayHours.length; i++) {
-    //add div with class row
-    var timeBlockRow = $('<div>')
-        .addClass('row time-block')
-        .attr({
-            id: 'row-' + (i + 9)
-        })
+// Function to create the time blocks
+function createTimeBlocks() {
+  var container = $(".container");
+  var currentHour = moment().hour();
 
-    // add 1 div with class hour
-    var timeBlockHour = $('<div>')
-        .addClass('col-1 hour')
-        .text(workDayHours[i])
-        .attr({
-            id: i + 9
-        })
+  for (var hour = 9; hour <= 17; hour++) {
+    var timeBlock = $("<div>").addClass("row time-block");
+    var hourColumn = $("<div>").addClass("col-1 hour").text(moment(hour, "H").format("hA"));
+    var descriptionColumn = $("<textarea>").addClass("col-10 description");
+    var saveButton = $("<button>").addClass("col-1 saveBtn").html("<i class='fas fa-save'></i>");
 
-    // add 1 div with class
-    var timeBlockEventSpace = $('<div>')
-        .addClass('col-10')
-        .attr({
-            id: 'time-block-' + (i + 9)
-        })
+    // Set color code for past, present, and future time blocks
+    if (hour < currentHour) {
+      descriptionColumn.addClass("past");
+    } else if (hour === currentHour) {
+      descriptionColumn.addClass("present");
+    } else {
+      descriptionColumn.addClass("future");
+    }
 
-    // add p element with class of description
-    var userInput = $('<p>')
-        .addClass('description')
-        .text(' ')
-        .attr({
-            id: 'Hour-' + (i + 9)
-        });
+    // Retrieve saved event from local storage
+    var savedEvent = localStorage.getItem("event_" + hour);
+    if (savedEvent) {
+      descriptionColumn.val(savedEvent);
+    }
 
-    //check time
-    auditTimeBlock(timeBlockEventSpace);
+    // Event listener for saving the event to local storage
+    saveButton.on("click", function () {
+      var event = $(this).siblings(".description").val();
+      var hour = $(this).parent().attr("data-hour");
+      localStorage.setItem("event_" + hour, event);
+    });
 
-    // add a button with class saveBtn
-    var saveBtn = $('<button>')
-        .addClass('col-1 saveBtn')
-        .attr({
-            id: 'save-button-' + (i + 9),
-            type: 'button',
-        })
-        .on('click', function () {
-            // retrieve the hour of the timeblock
-            var hour = $(this).siblings().first().text();
-            // retrieve the value in <p> element
-            var task = $(this).siblings().last().text();
-
-            //save to local storage
-            saveTask(hour, task)
-
-        })
-
-    // add save icon
-    var saveIcon = $('<i>')
-        .addClass('fas fa-save');
-
-    //append timeBlockRow to div container
-    $(containerEl).append(timeBlockRow);
-    //append timeBlockHour to TimbeBlockRow
-    $(timeBlockRow).append(timeBlockHour);
-    //append timeBlockEventSpace to timeBlockRow
-    $(timeBlockRow).append(timeBlockEventSpace);
-    //append <p> element to timeBlockEventSpace
-    $(timeBlockEventSpace).append(userInput);
-    //append save button to timeBlowRow
-    $(timeBlockRow).append(saveBtn);
-    //append save icon to save button
-    $(saveBtn).append(saveIcon);
+    timeBlock.attr("data-hour", hour);
+    timeBlock.append(hourColumn, descriptionColumn, saveButton);
+    container.append(timeBlock);
+  }
 }
 
-// add functionality so when user clicks into time block:
-// edit the text content on focus
-$('.col-10').on('click', 'p', function () {
-
-    var text = $(this)
-        .text()
-        .trim()
-
-    var textInput = $('<textarea>')
-        .addClass('form-control')
-        .val(text);
-
-    $(this).replaceWith(textInput);
-
-    textInput.trigger('focus');
-});
-
-//  - hardcode the <p> content on blur
-$('.col-10').on('blur', 'textarea', function () {
-    // get the textarea's current value/text
-    var text = $(this)
-        .val()
-        .trim();
-
-    // recreate p element
-    var userTextP = $("<p>")
-        .addClass("description")
-        .text(text);
-
-    // replace textarea with p element
-    $(this).replaceWith(userTextP);
-})
-
-// to load tasks on every refresh
-loadTask();
-
-
+// Call the functions to initialize the page
+displayCurrentDay();
+createTimeBlocks();
