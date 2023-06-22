@@ -35,12 +35,17 @@ function createTimeBlocks() {
 
     // Set color code for past, present, and future time blocks
     if (hour < currentHour) {
-      descriptionColumn.addClass("past");
-    } else if (hour === currentHour) {
-      descriptionColumn.addClass("present");
-    } else {
-      descriptionColumn.addClass("future");
-    }
+        descriptionColumn.addClass("past");
+      } else if (hour === currentHour) {
+        descriptionColumn.addClass("present").removeClass("future");
+      } else {
+        descriptionColumn.addClass("future");
+      }
+
+    // Additional condition to make 1pm to 5pm blocks green
+    if (hour >= 13 && hour <= 17) {
+        descriptionColumn.removeClass("past present future").addClass("future");
+      }  
 
     // Retrieve saved event from local storage
     var savedEvent = localStorage.getItem("event_" + hour);
