@@ -73,10 +73,10 @@ textarea {
 
 .saveBtn i:hover {
     /* Increase font size on hover */
-    font-size: 20px;
+    font-size: 40px;
 
     /* Transition effect */
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 .header {
