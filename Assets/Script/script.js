@@ -23,4 +23,3 @@ $(function () {
 });
 
 
-// checking commit options as I think I messed something up
