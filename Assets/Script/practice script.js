@@ -41,7 +41,7 @@ var task = $('.description')
 
 // ** END GLOBAL VARIABLES ** //
 
-//add current day to <p> tag in jumbotron
+//add current day to <p> tag in header
 var currentDay = moment().format('dddd, MMMM Do');
 currentDayEl.text(currentDay);
 
