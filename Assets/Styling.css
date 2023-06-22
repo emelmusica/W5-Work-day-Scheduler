@@ -83,3 +83,8 @@ textarea {
     /* Center text */
     text-align: center;
 }
+
+/* Current date */
+.currentdate {
+    color: #ec0c00;
+}
