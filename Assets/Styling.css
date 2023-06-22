@@ -68,7 +68,7 @@ textarea {
 
     /* Background and text color */
     background-color: #06aed5;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 .saveBtn i:hover {
@@ -87,6 +87,7 @@ textarea {
     /* Make it square */
     border-radius: 0;
 }
+
 
 /* Current date */
 .currentdate {
