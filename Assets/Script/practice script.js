@@ -24,7 +24,7 @@ $(function () {
       // Loop through each time block
       $(".time-block").each(function () {
         var timeBlock = $(this);
-        var timeBlockId = timeBlock.attr("id");
+        var timeBlockId = parseInt(timeBlock.attr("id").split("-")[1]);
   
         // Remove any past, present, and future classes
         timeBlock.removeClass("past present future");
@@ -32,7 +32,7 @@ $(function () {
         // Compare the time block id with the current hour and apply the appropriate class
         if (timeBlockId < currentHour) {
           timeBlock.addClass("past");
-        } else if (timeBlockId === currentHour) {
+        } else if (timeBlockId === parseInt(currentHour)) {
           timeBlock.addClass("present");
         } else {
           timeBlock.addClass("future");
