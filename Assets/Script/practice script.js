@@ -1,5 +1,3 @@
-// ** START PSEUDO CODE (subject to change) ** //
-
 // add current day to display at top of page under header
 //  - will add text content of current day and append to the <p> element in the header in the format 'Name of Day', 'Full name of month', 'Numerical Day with suffix th or st'
 // add time blocks to div container using jquery (3 columns in a row, 9 rows):
@@ -15,8 +13,6 @@
 //  - hardcode the content on blur
 // when user clicks the save button icon the text for the event saves into local storage via an array object
 // when user refreshes page - get the object array from local storage and recreate the events on the page
-
-// ** END PSEUDO CODE ** //
 
 // ** GLOBAL VARIABLES ** // 
 
