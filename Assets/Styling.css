@@ -82,6 +82,10 @@ textarea {
 .header {
     /* Center text */
     text-align: center;
+    /* Black square border */
+    border: 1px solid black;
+    /* Make it square */
+    border-radius: 0;
 }
 
 /* Current date */
