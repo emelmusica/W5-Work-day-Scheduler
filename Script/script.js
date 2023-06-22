@@ -21,3 +21,6 @@ $(function () {
   //
   // TODO: Add code to display the current date in the header of the page.
 });
+
+
+// checking commit options as I think I messed something up
