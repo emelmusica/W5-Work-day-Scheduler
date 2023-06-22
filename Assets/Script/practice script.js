@@ -1,47 +1,65 @@
 $(function () {
-    // Add a listener for click events on the save button.
+    // Get the current date using Day.js and display it in the header
+    var currentDate = dayjs().format("dddd, MMMM D, YYYY");
+    $("#currentDay").text(currentDate);
+  
+    // Add a click event listener to the save button
     $(".saveBtn").on("click", function () {
-      var timeBlockId = $(this).closest(".time-block").attr("id");
-      var userInput = $(this).siblings(".description").val();
+      // Get the parent time-block element and its id
+      var timeBlock = $(this).parent();
+      var timeBlockId = timeBlock.attr("id");
+  
+      // Get the user input from the textarea
+      var userInput = timeBlock.find(".description").val();
+  
+      // Save the user input in local storage using the time-block id as the key
       localStorage.setItem(timeBlockId, userInput);
     });
   
-    // Apply the past, present, or future class to each time block.
-    function updateTimeBlocks() {
+    // Function to update the time block colors
+    function updateTimeBlockColors() {
+      // Get the current hour in 24-hour format
       var currentHour = dayjs().format("H");
-      $(".time-block").each(function () {
-        var timeBlockHour = parseInt($(this).attr("id").split("-")[1]);
   
-        if (timeBlockHour < currentHour) {
-          $(this).removeClass("present future").addClass("past");
-        } else if (timeBlockHour == currentHour) {
-          $(this).removeClass("past future").addClass("present");
+      // Loop through each time block
+      $(".time-block").each(function () {
+        var timeBlock = $(this);
+        var timeBlockId = timeBlock.attr("id");
+  
+        // Remove any past, present, and future classes
+        timeBlock.removeClass("past present future");
+  
+        // Compare the time block id with the current hour and apply the appropriate class
+        if (timeBlockId < currentHour) {
+          timeBlock.addClass("past");
+        } else if (timeBlockId === currentHour) {
+          timeBlock.addClass("present");
         } else {
-          $(this).removeClass("past present").addClass("future");
+          timeBlock.addClass("future");
         }
       });
     }
   
-    // Get any user input saved in localStorage and set the values of the corresponding textarea elements.
-    function populateSavedEvents() {
+    // Load any saved user input from local storage and set the textarea values
+    function loadSavedUserInput() {
+      // Loop through each time block
       $(".time-block").each(function () {
-        var timeBlockId = $(this).attr("id");
-        var savedEvent = localStorage.getItem(timeBlockId);
+        var timeBlock = $(this);
+        var timeBlockId = timeBlock.attr("id");
   
-        if (savedEvent) {
-          $(this).find(".description").val(savedEvent);
-        }
+        // Get the saved user input from local storage using the time-block id as the key
+        var userInput = localStorage.getItem(timeBlockId);
+  
+        // Set the textarea value with the saved user input
+        timeBlock.find(".description").val(userInput);
       });
     }
   
-    // Display the current date in the header of the page.
-    function displayCurrentDate() {
-      var currentDate = dayjs().format("dddd, MMMM D, YYYY");
-      $("#currentDay").text(currentDate);
-    }
+    // Call the functions to initially set up the page
+    updateTimeBlockColors();
+    loadSavedUserInput();
   
-    updateTimeBlocks();
-    populateSavedEvents();
-    displayCurrentDate();
+    // Update the time block colors every minute
+    setInterval(updateTimeBlockColors, 60000);
   });
   
