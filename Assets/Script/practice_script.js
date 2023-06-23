@@ -1,33 +1,28 @@
-/* execute code when the DOM is fully loaded */
 $(document).ready(function() {
 
-  // Function to get the current date and display it in the header
   function displayCurrentDay() {
-    var currentDate = dayjs().format("dddd, MMMM, DD");
+    var currentDate = dayjs().format("dddd, MMMM DD");
     $("#currentDay").text(currentDate);
   }
 
-  // Function to create the time blocks
   function createTimeBlocks() {
-    var container = $(".container");
+    var container = $(".container-fluid");
     var currentHour = dayjs().hour();
 
     for (var hour = 9; hour <= 17; hour++) {
       var timeBlock = $("<div>").addClass("row time-block");
-      var hourColumn = $("<div>").addClass("col-1 hour").text(dayjs().hour(hour).format("hA"));
-      var descriptionColumn = $("<textarea>").addClass("col-10 description");
-      var saveButton = $("<button>").addClass("col-1 saveBtn").html("<i class='fas fa-save'></i>");
+      var hourColumn = $("<div>").addClass("col-2 col-md-1 hour text-center py-3").text(dayjs().hour(hour).format("hA"));
+      var descriptionColumn = $("<textarea>").addClass("col-8 col-md-10 description");
+      var saveButton = $("<button>").addClass("btn saveBtn col-2 col-md-1").attr("aria-label", "save").html("<i class='fas fa-save' aria-hidden='true'></i>");
 
-      // Set color code for past, present, and future time blocks
       if (hour < currentHour) {
         descriptionColumn.addClass("past");
       } else if (hour === currentHour) {
-        descriptionColumn.addClass("present").removeClass("future");
+        descriptionColumn.addClass("present");
       } else {
         descriptionColumn.addClass("future");
       }
 
-      // Retrieve saved event from local storage
       var savedEvent = localStorage.getItem("event_" + hour);
       if (savedEvent) {
         descriptionColumn.val(savedEvent);
@@ -36,20 +31,18 @@ $(document).ready(function() {
         }
       }
 
-      // Event listener for saving the event to local storage
       saveButton.on("click", function() {
         var event = $(this).siblings(".description").val();
-        var hour = $(this).parent().attr("data-hour");
+        var hour = $(this).parent().attr("id").split("-")[1];
         localStorage.setItem("event_" + hour, event);
       });
 
-      timeBlock.attr("data-hour", hour);
+      timeBlock.attr("id", "hour-" + hour);
       timeBlock.append(hourColumn, descriptionColumn, saveButton);
       container.append(timeBlock);
     }
   }
 
-  // Call the functions to initialize the page
   displayCurrentDay();
   createTimeBlocks();
 });
