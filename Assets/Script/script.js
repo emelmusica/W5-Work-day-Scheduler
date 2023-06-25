@@ -37,3 +37,8 @@ $(function () {
       $(this).find(".description").val(userInput);
     }
   });
+
+  // Display the current date in the header of the page.
+  var currentDate = dayjs().format("dddd, MMMM DD");
+  $("#currentDay").text(currentDate);
+});
