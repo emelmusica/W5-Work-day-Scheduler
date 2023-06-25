@@ -14,11 +14,10 @@ $(function () {
     localStorage.setItem(timeBlockId, userInput);
   });
 
-  // Apply the past, present, or future class to each time block by comparing the id to the current hour.
   var currentHour = dayjs().hour();
-  $(".time-block").each(function () {
+  $(".container-fluid.px-5 .time-block").each(function () {
     var timeBlockHour = parseInt($(this).attr("id").split("-")[1]);
-
+  
     if (timeBlockHour < currentHour) {
       $(this).addClass("past");
     } else if (timeBlockHour === currentHour) {
@@ -27,7 +26,7 @@ $(function () {
       $(this).addClass("future");
     }
   });
-
+  
   // Get any user input that was saved in localStorage and set the values of the corresponding textarea elements.
   $(".time-block").each(function () {
     var timeBlockId = $(this).attr("id");

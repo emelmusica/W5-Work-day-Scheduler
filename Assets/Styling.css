@@ -41,24 +41,21 @@ body {
   
     /* Dashed top border */
     border-top: 1px dashed #000000;
+
+  }.container-fluid.px-5 .time-block {
+    color: rgb(0, 0, 0);
   }
   
-  .past {
-    /* Background and text color */
+  .container-fluid.px-5 .past {
     background-color: #d3d3d3;
-    color: rgb(0, 0, 0);
   }
   
-  .present {
-    /* Background and text color */
+  .container-fluid.px-5 .present {
     background-color: #ff6961;
-    color: rgb(0, 0, 0);
   }
   
-  .future {
-    /* Background and text color */
+  .container-fluid.px-5 .future {
     background-color: #77dd77;
-    color: rgb(0, 0, 0);
   }
   
   .saveBtn {
