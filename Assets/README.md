@@ -1,34 +1,36 @@
 # W5-Work-day-Scheduler
 
-Week 5 Challenge "Work Day Scheduler
+Week 5 Challenge "Work Day Scheduler"
+
+Deployed Application Link: https://emelmusica.github.io/W5-Work-day-Scheduler/
 
 For this challenge we are meant to build a simple work day scheduler that falls within the criteria provided:
 
-# Given I am using a daily planner to create a schedule
+Given I am using a daily planner to create a schedule
 
-# When I open the planner
+When I open the planner
 
-# Then the current day is displayed at the top of the calendar
+Then the current day is displayed at the top of the calendar
 
-# When I scroll down
+When I scroll down
 
-# Then I am presented with time blocks for standard business hours of 9am to 5pm
+Then I am presented with time blocks for standard business hours of 9am to 5pm
 
-# When I view the time blocks for that day
+When I view the time blocks for that day
 
-# Then each time block is color-coded to indicate whether it is in the past, present, or future
+Then each time block is color-coded to indicate whether it is in the past, present, or future
 
-# When I click into a time block
+When I click into a time block
 
-# Then I can enter an event
+Then I can enter an event
 
-# When I click the save button for that time block
+When I click the save button for that time block
 
-# Then the text for that event is saved in local storage
+Then the text for that event is saved in local storage
 
-# When I refresh the page
+When I refresh the page
 
-# Then the saved events persist
+Then the saved events persist
 
 With the starter code provided I was able to focus primarily on the javascript portion of this challenge that required us to use DayJS and all the other fundamentals that we've learned in the past two weeks along with some html and css implemented into this activity.
 
