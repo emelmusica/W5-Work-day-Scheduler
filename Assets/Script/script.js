@@ -14,10 +14,15 @@ $(function () {
     localStorage.setItem(timeBlockId, userInput);
   });
 
+  // Get the current hour using the dayjs library.
   var currentHour = dayjs().hour();
+
+  // Iterate over each time-block container.
   $(".container-fluid.px-5 > div").each(function () {
+    // Get the hour value from the time-block's id attribute.
     var timeBlockHour = parseInt($(this).attr("id").split("-")[1]);
-  
+
+    // Compare the time-block hour with the current hour to determine its status (past, present, or future).
     if (timeBlockHour < currentHour) {
       $(this).removeClass("present future").addClass("past");
     } else if (timeBlockHour === currentHour) {
@@ -25,8 +30,7 @@ $(function () {
     } else {
       $(this).removeClass("past present").addClass("future");
     }
-  });  
-
+  });
 
   // Get any user input that was saved in localStorage and set the values of the corresponding textarea elements.
   $(".time-block").each(function () {
