@@ -107,16 +107,16 @@ body {
   
   .container-fluid.px-5 .time-block.past .description,
   .container-fluid.px-5 .time-block.past .saveBtn {
-    color: #000000;
+    color: #aeaeae;
   }
   
   .container-fluid.px-5 .time-block.present .description,
   .container-fluid.px-5 .time-block.present .saveBtn {
-    color: #000000;
+    color: #ff7171;
   }
   
   .container-fluid.px-5 .time-block.future .description,
   .container-fluid.px-5 .time-block.future .saveBtn {
-    color: #000000;
+    color: #8cff66;
   }
   
