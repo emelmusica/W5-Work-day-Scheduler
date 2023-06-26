@@ -87,17 +87,17 @@ body {
   }
   
   .container-fluid.px-5 .time-block.past .description,
-  .container-fluid.px-5 .time-block.past .saveBtn {
+  .container-fluid.px-5 .time-block.past textarea {
     color: #aeaeae;
   }
   
   .container-fluid.px-5 .time-block.present .description,
-  .container-fluid.px-5 .time-block.present .saveBtn {
+  .container-fluid.px-5 .time-block.present textarea {
     color: #ff7171;
   }
   
   .container-fluid.px-5 .time-block.future .description,
-  .container-fluid.px-5 .time-block.future .saveBtn {
+  .container-fluid.px-5 .time-block.future textarea {
     color: #8cff66;
   }
   
