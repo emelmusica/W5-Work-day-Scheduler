@@ -2,20 +2,14 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 $(function () {
-  // Add a listener for click events on the save button.
   $(".saveBtn").on("click", function () {
-    // Get the id of the containing time-block.
-    var timeBlockId = $(this).closest(".time-block").attr("id");
-
-    // Get the user input from the description textarea.
+    var timeBlockId = $(this).closest(".container-fluid.px-5 > div").attr("id");
     var userInput = $(this).siblings(".description").val();
-
-    // Save the user input in local storage using the time block id as the key.
     localStorage.setItem(timeBlockId, userInput);
   });
 
   var currentHour = dayjs().hour();
-  $(".container-fluid.px-5 .time-block").each(function () {
+  $(".container-fluid.px-5 > div").each(function () {
     var timeBlockHour = parseInt($(this).attr("id").split("-")[1]);
   
     if (timeBlockHour < currentHour) {
@@ -27,8 +21,7 @@ $(function () {
     }
   });  
 
-  // Get any user input that was saved in localStorage and set the values of the corresponding textarea elements.
-  $(".time-block").each(function () {
+  $(".container-fluid.px-5 > div").each(function () {
     var timeBlockId = $(this).attr("id");
     var userInput = localStorage.getItem(timeBlockId);
 
@@ -37,7 +30,6 @@ $(function () {
     }
   });
 
-  // Display the current date in the header of the page.
   var currentDate = dayjs().format("dddd, MMMM DD");
   $("#currentDay").text(currentDate);
 });
