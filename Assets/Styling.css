@@ -86,16 +86,16 @@ body {
     margin-right: 5px;
   }
   
-  .container-fluid.px-5 .time-block.past textarea.description {
-    color: #aeaeae;
+  .container-fluid.px-5 .time-block.past .description {
+    background-color: #d3d3d3;
   }
   
-  .container-fluid.px-5 .time-block.present textarea.description {
-    color: #ff7171;
+  .container-fluid.px-5 .time-block.present .description {
+    background-color: #ff8a8a;
   }
   
-  .container-fluid.px-5 .time-block.future textarea.description {
-    color: #8cff66;
+  .container-fluid.px-5 .time-block.future .description {
+    background-color: #8cff66;
   }
   
   
