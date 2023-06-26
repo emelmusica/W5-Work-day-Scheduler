@@ -27,6 +27,7 @@ $(function () {
     }
   });  
 
+
   // Get any user input that was saved in localStorage and set the values of the corresponding textarea elements.
   $(".time-block").each(function () {
     var timeBlockId = $(this).attr("id");
