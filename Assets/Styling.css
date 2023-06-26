@@ -91,11 +91,11 @@ body {
   }
   
   .container-fluid.px-5 .time-block.present .description {
-    background-color: #ff8a8a;
+    background-color: #ef3f3f;
   }
   
   .container-fluid.px-5 .time-block.future .description {
-    background-color: #8cff66;
+    background-color: #57ee24;
   }
   
   
