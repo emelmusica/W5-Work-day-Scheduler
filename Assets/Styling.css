@@ -12,7 +12,7 @@ body {
   
     /* Text color and padding */
     color: #000000;
-    padding: 5px; 
+    padding: 5px;
   }
   
   .description {
@@ -25,9 +25,8 @@ body {
     border-radius: 15px;
     width: 80%;
     margin: 0 auto;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
   }
-  
   
   .row {
     /* Top border */
@@ -41,21 +40,25 @@ body {
   
     /* Dashed top border */
     border-top: 1px dashed #000000;
-
-  }.container-fluid.px-5 .time-block {
+  }
+  
+  .container-fluid.px-5 .time-block {
     color: rgb(0, 0, 0);
   }
   
   .container-fluid.px-5 .past {
     background-color: #d3d3d3;
+    color: rgb(0, 0, 0);
   }
   
   .container-fluid.px-5 .present {
     background-color: #ff6961;
+    color: rgb(0, 0, 0);
   }
   
   .container-fluid.px-5 .future {
     background-color: #77dd77;
+    color: rgb(0, 0, 0);
   }
   
   .saveBtn {
@@ -100,5 +103,20 @@ body {
   .currentdate::before {
     content: '⏳';
     margin-right: 5px;
+  }
+  
+  .container-fluid.px-5 .time-block.past .description,
+  .container-fluid.px-5 .time-block.past .saveBtn {
+    color: #000000;
+  }
+  
+  .container-fluid.px-5 .time-block.present .description,
+  .container-fluid.px-5 .time-block.present .saveBtn {
+    color: #000000;
+  }
+  
+  .container-fluid.px-5 .time-block.future .description,
+  .container-fluid.px-5 .time-block.future .saveBtn {
+    color: #000000;
   }
   
